@@ -38,6 +38,6 @@ jobs:
           REGISTRY: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com
           REPOSITORY: yohan-ordersystem
         run: |
-          docker build -t $REGISTRY/REPOSITORY:latest \
+          docker build -t $REGISTRY/$REPOSITORY:latest \
           -f ./ordersystem/Dockerfile ./ordersystem \
-          docker push
+          docker push $REGISTRY/$REPOSITORY:latest
