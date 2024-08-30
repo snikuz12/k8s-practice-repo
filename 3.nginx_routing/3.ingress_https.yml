@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: yo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx-service
+  namespace: yo  # Service의 namespace 설정
+spec:
+  # ingress를 적용하기 위해 ClusterIP로 변경
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: my-nginx
+# 쿠버네티스에서 https 인증서 적용 절차
+# 1. cert-manager 생성
+  # 1-1. cert-manager 생성을 위한 cert-manager namespace 생성 : kubectl create namespace cert-manager
+  # 1-2. helm 패키지 매니저 설치 : 구글 검색 후 다운로드 후 로컬에 설치
+  # 1-3. helm repository 추가 : helm repo add jetstack https://charts.jetstack.io
+  # 1-4. helm repository update : helm repo update
+  # 1-5. helm을 통해 cert-manager 설치 : helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.5.0 --set installCRDs=true
+#
+# 2. ClusterIssuer 생성
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # 인증서 서버 주소. 해당 서버의 리소스를 통해 인증서 발행
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: snikuz12@naver.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+# 3. Certificate 생성
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: yohan-com-tls
+  namespace: yo
+spec:
+  secretName: yohan-com-tls
+  duration: 2160h # 90일
+  renewBefore: 36h # 15일전에 갱신
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: server.teenkiri.store
+  dnsNames:
+    - server.teenkiri.store
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-nginx-ingress
+  namespace: yo  # Ingress의 namespace 설정
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1 # 첫번째 prefix제거후 endpoint 전달
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - "server.teenkiri.store"
+    secretName: yohan-com-tls
+  rules:
+    - host: server.teenkiri.store
+      http: 
+        paths:
+          - path: /product-service/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port: 
+                  number: 80
+          - path: /order-service/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port: 
+                  number: 80
