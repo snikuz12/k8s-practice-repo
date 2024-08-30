@@ -65,14 +65,14 @@ spec:
                 key: JWT_SECRET_RT
                 name: yohan-secrets
 
-          - name: AWS_ACCESS_KEY
+          - name: AWS_KEY
             valueFrom:
               secretKeyRef:
-                key: AWS_ACCESS_KEY
+                key: AWS_KEY
                 name: yohan-secrets
                 
-          - name: AWS_SECRET_KEY
+          - name: AWS_SECRET
             valueFrom:
               secretKeyRef:
-                key: AWS_SECRET_KEY
+                key: AWS_SECRET
                 name: yohan-secrets
