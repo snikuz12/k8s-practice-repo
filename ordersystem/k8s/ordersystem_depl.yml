@@ -33,34 +33,34 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: REDIS_HOST
-                name: yohan-app-secrets
+                name: yohan-secrets
 
           - name: DB_HOST
             valueFrom:
               secretKeyRef:
                 key: DB_HOST
-                name: yohan-app-secrets
+                name: yohan-secrets
 
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
                 key: DB_USERNAME
-                name: yohan-app-secrets 
+                name: yohan-secrets 
 
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 key: DB_PASSWORD
-                name: yohan-app-secrets
+                name: yohan-secrets
 
           - name: JWT_SECRET
             valueFrom:
               secretKeyRef:
                 key: JWT_SECRET
-                name: yohan-app-secrets
+                name: yohan-secrets
 
           - name: JWT_SECRET_RT
             valueFrom:
               secretKeyRef:
                 key: JWT_SECRET_RT
-                name: yohan-app-secrets
+                name: yohan-secrets
