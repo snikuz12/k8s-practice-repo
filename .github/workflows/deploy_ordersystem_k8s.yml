@@ -39,5 +39,5 @@ jobs:
           REPOSITORY: yohan-ordersystem
         run: |
           docker build -t $REGISTRY/$REPOSITORY:latest \
-          -f ./ordersystem/Dockerfile ./ordersystem \
+          -f ./ordersystem/Dockerfile ./ordersystem
           docker push $REGISTRY/$REPOSITORY:latest
