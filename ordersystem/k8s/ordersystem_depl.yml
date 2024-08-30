@@ -22,11 +22,11 @@ spec:
           resources:
           # 최대 할당가능량
             limits:
-              cpu: "250m"
+              cpu: "0.2"
               memory: "250Mi"
           # 최소 할당량
             requests:
-              cpu: "500m"
+              cpu: "0.2"
               memory: "250Mi"
           env:
           - name: REDIS_HOST
