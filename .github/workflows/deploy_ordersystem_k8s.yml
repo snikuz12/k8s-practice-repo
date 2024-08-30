@@ -30,7 +30,7 @@ jobs:
         run: aws eks update-kubeconfig --name teenkiri --region ap-northeast-2
 
       - name: login ECR
-        id: login-ecr
+        id: login-ecrkubect
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: build and push docker images to ecr
