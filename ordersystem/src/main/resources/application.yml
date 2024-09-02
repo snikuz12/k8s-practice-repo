@@ -1,38 +1,45 @@
-# 아래의 주요 key, secret은 쿠버네티스의 secret 자원을 사용하여 실행시점에 대체
-
+# 아래의 주요 key, secret은 쿠버네티스의 secret 자원을 사용하여 실행시점에 대체 
 
 server:
   port: 8080
+
 spring:
   redis:
-  # 아래 REDIS_HOST는 deployment에서 정의한 env변수명과 일치해야 함
+    # REDIS_HOST : deployment에서 정의한 env변수명과 일치해야 함 
     host: ${REDIS_HOST}
     port: 6379
+  # rabbitmq 환경설정
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/shop
+    url: jdbc:mariadb://${DB_HOST}:3306/shop
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    # spring에서 db로의 커넥션 개수 제한
-    # 기본적으로 대랸 10개 가량의 너켁션이 1개의 서버에서 발생.
-    tomcat:
+    # spring에서 db로의 커넥션 개수 제한 
+    # 기본적으로 대략 10개 가량의 커넥션이 1개의 서버에서 발생 
+    tomcat: 
       max-active: 5
+    
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MariaDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
 logging:
   level:
     root: info
 jwt:
-  expiration : 300
-  secretKey : ${JWT_SECRET}
-  expirationRT : 13400
-  secretKeyRT : ${JWT_SECRET_RT}
-
+  expiration: 5
+  secretKey: ${JWT_SECRET}
+  expirationRt: 14400
+  secretKeyRt: ${JWT_SECRET_RT}
 #aws s3 설정
 cloud:
   aws:
