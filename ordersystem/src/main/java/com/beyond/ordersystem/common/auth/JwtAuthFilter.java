@@ -43,7 +43,7 @@ public class JwtAuthFilter extends GenericFilter {
                 }
                 String token = bearertoken.substring(7); // 7 이후 자리만 cut!
 //            token 검증 및 claims(사용자 정보) 추출
-//            token생성시에 사용한 secret 키값을 넣어 토큰 검증에 사용 밑에가 걍 검증 코드인거ㅣㅁ
+//            token생성시에 사용한 secret 키값을 넣어 토큰 검증에 사용 밑에가 걍 검증 코드임
                 Claims claims = Jwts.parser()
                         .setSigningKey(secretKey)
                         .parseClaimsJws(token)
