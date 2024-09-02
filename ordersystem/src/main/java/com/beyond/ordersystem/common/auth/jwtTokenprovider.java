@@ -17,10 +17,10 @@ public class jwtTokenprovider {
     @Value("${jwt.secretKey}")
     private  String secretKey;
 
-    @Value("${jwt.secretKeyRT}")
-    private  String secretKeyRT;
+    @Value("${jwt.secretKeyRt}")
+    private  String secretKeyRt;
 
-    @Value("${jwt.expirationRT}")
+    @Value("${jwt.expirationRt}")
     private  int expirationRT;
 
     public String createToken(String email, String role){
@@ -46,7 +46,7 @@ public class jwtTokenprovider {
                 .setClaims(claims)
                 .setIssuedAt(now)// 생성 시간
                 .setExpiration(new Date(now.getTime() + expirationRT * 60 * 1000L))
-                .signWith(SignatureAlgorithm.HS256, secretKeyRT)
+                .signWith(SignatureAlgorithm.HS256, secretKeyRt)
                 .compact();
         return token;
     }

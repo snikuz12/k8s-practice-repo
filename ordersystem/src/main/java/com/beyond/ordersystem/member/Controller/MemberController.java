@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class MemberController {
 
-    @Value("${jwt.secretKeyRT}")
+    @Value("${jwt.secretKeyRt}")
     private  String secretKey;
 
 

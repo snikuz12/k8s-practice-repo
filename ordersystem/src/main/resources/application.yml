@@ -39,7 +39,8 @@ jwt:
   expiration: 5
   secretKey: ${JWT_SECRET}
   expirationRt: 14400
-  secretKeyRt: ${JWT_SECRET_RT}
+  secretKeyRt: ${JWT_SECRET_RT}  
+
 #aws s3 설정
 cloud:
   aws:
