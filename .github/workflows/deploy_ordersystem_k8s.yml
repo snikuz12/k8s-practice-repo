@@ -49,7 +49,7 @@ jobs:
       - name: eks kubectl apply
         run: |
           kubectl apply -f ./msa/member/k8s/member_depl.yml
-          kubectl rollout restart deployment member-deployment -n ro
+          kubectl rollout restart deployment member-deployment -n yo
 
 
 
@@ -68,7 +68,7 @@ jobs:
       - name: eks kubectl apply
         run: |
           kubectl apply -f ./msa/order/k8s/order_depl.yml
-          kubectl rollout restart deployment order-deployment -n ro
+          kubectl rollout restart deployment order-deployment -n yo
 
 
 
@@ -88,4 +88,4 @@ jobs:
       - name: eks kubectl apply
         run: |
           kubectl apply -f ./msa/product/k8s/product_depl.yml
-          kubectl rollout restart deployment product-deployment -n ro
+          kubectl rollout restart deployment product-deployment -n yo
