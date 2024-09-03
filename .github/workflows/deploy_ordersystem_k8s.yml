@@ -1,11 +1,10 @@
-# # docker 빌드 후 ecr 업로드
-#docker 빌드 후 ecr 업로드 및 kuectl apply
+# docker 빌드 후 ecr 업로드 및 kubectl apply
 
 name: deploy ordersystem with k8s
 on:
   push:
     branches:
-      - main
+        - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,15 +21,16 @@ jobs:
       - name: configure aws
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{secrets.AWS_KEY}}
-          aws-secret-access-key: ${{secrets.AWS_SECRET}}
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
           aws-region: ap-northeast-2
+
 
       - name: update cluster information
         run: aws eks update-kubeconfig --name teenkiri --region ap-northeast-2
 
       - name: login ECR
-        id: login-ecr
+        id: login-ecrkubect
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: build and push docker member images to ecr
