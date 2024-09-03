@@ -48,8 +48,8 @@ jobs:
       # 이미지
       - name: eks kubectl apply
         run: |
-          kubectl apply -f ./msa/order/k8s/member_depl.yml
-          kubectl rollout restart deployment order-deployment -n ro
+          kubectl apply -f ./msa/member/k8s/member_depl.yml
+          kubectl rollout restart deployment member-deployment -n ro
 
 
 
