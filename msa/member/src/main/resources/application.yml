@@ -1,0 +1,43 @@
+spring:
+  redis:
+    host: ${REDIS_HOST}
+    port: 6379
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DB_HOST}:3306/ordersystem
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+
+  #  eureka용 서비스 이름 명명
+  #  spring 안에 써야함!
+  #  아래의 name은, eureka에 서비스 명으로 등록되는 이름
+  application:
+    name: member-service
+
+logging:
+  level:
+    root: info
+jwt:
+  expiration : 300
+  secretKey : ${JWT_SECRET}
+  expirationRT : 13400
+  secretKeyRT : ${JWT_SECRET_RT}
+
+#aws s3 설정
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: please-file

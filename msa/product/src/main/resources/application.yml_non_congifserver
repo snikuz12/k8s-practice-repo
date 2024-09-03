@@ -1,0 +1,12 @@
+spring:
+  application:
+    # 내 이름은 product-servie야!
+    name: product-service
+  config:
+    #    config 서버에 접속하고, 거기서 공통 yml파일과
+    #       내 applictaion의 product-service인 yml 파일을 찾는다!
+    import: "optional:configserver:http://localhost:8888"
+    fail-fast: true
+  # 실시간으로 config bus 받기용 추가 yml 코드
+  bus:
+    enabled: true

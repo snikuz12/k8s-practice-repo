@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ordersystem-deployment
+  name: product-deployment
   namespace: yo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ordersystem
+      app: product
   template:
     metadata:
       labels:
-        app: ordersystem
+        app: product
     spec:
       containers:
-        - name: ordersystem
+        - name: product
           image: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com/yohan-ordersystem:latest
           ports:
             - containerPort: 8080
