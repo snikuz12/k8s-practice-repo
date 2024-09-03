@@ -19,7 +19,7 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show_sql: true
   #    아래 name은 eureka에 서비스명으로 등록되는 이름.
   application:
     name: order-service

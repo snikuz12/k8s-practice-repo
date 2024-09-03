@@ -16,7 +16,7 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show_sql: true
   application:
     name: product-service
 

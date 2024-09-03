@@ -4,7 +4,7 @@ metadata:
   name: order-deployment
   namespace: yo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: order
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com/yohan-ordersystem:latest
+          image: 346903264902.dkr.ecr.ap-northeast-2.amazonaws.com/yohan-order:latest
           ports:
             - containerPort: 8080
           resources:
